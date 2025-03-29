@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface ITransaction extends mongoose.Document {
+export interface ITransaction extends mongoose.Document {
   accountId: mongoose.Schema.Types.ObjectId;
   amount: number;
   type: "deposit" | "withdrawal" | "transfer";
