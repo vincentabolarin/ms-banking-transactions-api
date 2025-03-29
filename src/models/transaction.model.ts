@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface Transaction extends mongoose.Document {
+export interface ITransaction extends mongoose.Document {
   accountId: mongoose.Schema.Types.ObjectId;
   amount: number;
   type: "deposit" | "withdrawal" | "transfer";
@@ -22,4 +22,4 @@ const TransactionSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model<Transaction>("Transaction", TransactionSchema);
+export default mongoose.model<ITransaction>("Transaction", TransactionSchema);
