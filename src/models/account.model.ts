@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface Account extends mongoose.Document {
+interface IAccount extends mongoose.Document {
   userId: mongoose.Schema.Types.ObjectId;
   balance: number;
   currency: string;
@@ -21,4 +21,4 @@ const AccountSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<Account>("Account", AccountSchema);
+export default mongoose.model<IAccount>("Account", AccountSchema);
