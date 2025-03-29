@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-interface IAccount extends mongoose.Document {
+export interface IAccount extends mongoose.Document {
   userId: mongoose.Schema.Types.ObjectId;
   balance: number;
   currency: string;
