@@ -1,13 +1,13 @@
 import { injectable } from "tsyringe";
-import User from "../models/user.model";
+import User, { IUser } from "../models/user.model.js";
 
 @injectable()
 export class UserRepository {
-  async create(userData: any) {
+  create = async (userData: IUser) => {
     return await User.create(userData);
   }
 
-  async findByEmail(email: string) {
+  findByEmail = async (email: string) => {
     return await User.findOne({ email });
   }
 }
