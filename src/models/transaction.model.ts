@@ -5,6 +5,7 @@ export interface ITransaction extends mongoose.Document {
   amount: number;
   type: "deposit" | "withdrawal" | "transfer";
   createdAt: Date;
+  updatedAt: Date;
 }
 
 const TransactionSchema = new mongoose.Schema({
@@ -19,7 +20,6 @@ const TransactionSchema = new mongoose.Schema({
     enum: ["deposit", "withdrawal", "transfer"],
     required: true,
   },
-  createdAt: { type: Date, default: Date.now },
-});
+}, { timestamps: true});
 
 export default mongoose.model<ITransaction>("Transaction", TransactionSchema);

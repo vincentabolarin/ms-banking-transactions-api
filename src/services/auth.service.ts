@@ -47,7 +47,7 @@ export class AuthService {
       const user = await this.userRepository.findByEmail(email);
 
       if (!user) {
-        throw new Error("Invalid credentials");
+        return new ErrorResponse("Invalid credentials");
       }
 
       // Check password validity
@@ -57,7 +57,7 @@ export class AuthService {
       );
 
       if (!isPasswordValid) {
-        throw new Error("Invalid credentials");
+        return new ErrorResponse("Invalid credentials");
       }
 
       // Generate JWT token
