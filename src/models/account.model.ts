@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface IAccount extends mongoose.Document {
-  userId: mongoose.Schema.Types.ObjectId;
+  userId: mongoose.Types.ObjectId;
   balance: number;
   currency: string;
   createdAt?: Date;

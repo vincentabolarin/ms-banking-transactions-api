@@ -8,16 +8,16 @@ export class AccountRepository {
     return await Account.create(accountData);
   };
 
-  findByUserId = async (userId: mongoose.Schema.Types.ObjectId) => {
+  findByUserId = async (userId: mongoose.Types.ObjectId) => {
     return await Account.findOne({ userId });
   };
 
-  findById = async (accountId: mongoose.Schema.Types.ObjectId) => {
+  findById = async (accountId: mongoose.Types.ObjectId) => {
     return await Account.findById(accountId);
   };
 
   updateBalance = async (
-    accountId: mongoose.Schema.Types.ObjectId,
+    accountId: mongoose.Types.ObjectId,
     amount: number,
     session?: ClientSession
   ) => {

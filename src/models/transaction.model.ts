@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export interface ITransaction extends mongoose.Document {
-  accountId: mongoose.Schema.Types.ObjectId;
+  accountId: mongoose.Types.ObjectId;
   amount: number;
   type: "deposit" | "withdrawal" | "transfer";
   createdAt: Date;
