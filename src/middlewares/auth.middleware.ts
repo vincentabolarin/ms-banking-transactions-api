@@ -29,9 +29,10 @@ const authMiddleware = (
 
   // Check if the token is present
   if (!token) {
-    return res
+    res
       .status(401)
       .json(new ErrorResponse("Access denied; no token provided"));
+    return;
   }
 
   try {
