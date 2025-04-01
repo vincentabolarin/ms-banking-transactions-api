@@ -116,9 +116,13 @@ export class TransactionController {
 
   getTransactions = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const page = parseInt(req.query.page as string) || 1;
+      const limit = parseInt(req.query.limit as string) || 10;
+
       const { accountId } = req.params;
+      
       const result = await this.transactionService.getTransactions(
-        new mongoose.Types.ObjectId(accountId)
+        new mongoose.Types.ObjectId(accountId), page, limit
       );
       
       if (!result.success) {

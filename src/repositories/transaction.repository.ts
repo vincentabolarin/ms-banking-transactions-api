@@ -8,7 +8,11 @@ export class TransactionRepository {
     return await Transaction.create([{ ...transactionData }], { session });
   }
 
-  findAllByAccount = async (accountId: mongoose.Types.ObjectId) => {
-    return await Transaction.find({ accountId });
+  findAllByAccount = async (accountId: mongoose.Types.ObjectId, skip: number, limit: number) => {
+    const transactions = await Transaction.find({ accountId }).sort({ createdAt: -1 }).skip(skip).limit(limit);
+
+    const transactionCount = await Transaction.countDocuments({ accountId });
+
+    return { transactions, transactionCount };
   }
 }
