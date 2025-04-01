@@ -7,7 +7,7 @@ import rateLimit from "express-rate-limit";
 import connectDB from "./config/db.js";
 import authRoutes from "./routes/auth.route.js";
 import accountRoutes from "./routes/account.route.js";
-// import transactionRoutes from "./routes/transaction.route.js";
+import transactionRoutes from "./routes/transaction.route.js";
 
 dotenv.config();
 
@@ -33,6 +33,6 @@ app.use(limiter);
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/account", accountRoutes);
-// app.use("/api/transactions", transactionRoutes);
+app.use("/api/transaction", transactionRoutes);
 
 export default app;
