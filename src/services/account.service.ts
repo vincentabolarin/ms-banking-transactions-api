@@ -10,7 +10,7 @@ export class AccountService {
   ) {}
 
   createAccount = async (
-    userId: mongoose.Schema.Types.ObjectId,
+    userId: mongoose.Types.ObjectId,
     currency: string
   ) => {
     try {
@@ -33,7 +33,7 @@ export class AccountService {
     }
   }
 
-  getAccount = async (userId: mongoose.Schema.Types.ObjectId) => {
+  getAccount = async (userId: mongoose.Types.ObjectId) => {
     try {
       const account = await this.accountRepository.findByUserId(userId);
       if (!account) {
@@ -45,7 +45,7 @@ export class AccountService {
     }
   }
 
-  updateBalance = async (accountId: mongoose.Schema.Types.ObjectId, amount: number) => {
+  updateBalance = async (accountId: mongoose.Types.ObjectId, amount: number) => {
     try {
       const result = await this.accountRepository.updateBalance(accountId, amount);
       return new SuccessResponse("Balance updated successfully", result);
