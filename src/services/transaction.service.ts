@@ -150,7 +150,7 @@ export class TransactionService {
     }
   };
 
-  getTransactions = async (accountId: mongoose.Types.ObjectId) => {
+  getTransactions = async (accountId: mongoose.Types.ObjectId, page: number = 1, limit: number = 10) => {
     // Check if the account exists
     const account = await this.accountRepository.findById(
       accountId
@@ -160,12 +160,54 @@ export class TransactionService {
       return new ErrorResponse("Account does not exist");
     }
 
-    const transactions = await this.transactionRepository.findAllByAccount(accountId);
+    try {
+      const skip = (page - 1) * limit;
 
-    // Check if there are any transactions for the account
-    if (!transactions) {
-      return new ErrorResponse("No transaction found for this account");
+      const { transactions, transactionCount} = await this.transactionRepository.findAllByAccount(
+        accountId, skip, limit
+      )
+
+      const totalPages = Math.ceil(transactionCount / limit);
+
+      const baseUrl = process.env.BASE_URL;
+
+      const previousPage =
+        page > 1 ? `${baseUrl}/transaction/${accountId}?page=${page - 1}&limit=${limit}` : null;
+
+      const nextPage =
+        page < totalPages
+          ? `${baseUrl}/transaction/${accountId}?page=${
+              page + 1
+            }&limit=${limit}`
+          : null;
+      
+      const data = {
+        page,
+        limit,
+        totalPages,
+        previous: previousPage,
+        next: nextPage,
+        transactionCount,
+        transactions
+      }
+
+      // Check if the page exceeds the available data
+      if (page > totalPages && transactionCount > 0) {
+        return new ErrorResponse("Page exceeds the available data");
+      }
+
+      // Check if there are any transactions for the account
+      if (transactions.length === 0) {
+        return new SuccessResponse("No transaction found for this account");
+      }
+
+      return new SuccessResponse(
+        "Transactions retrieved successfully",
+        data
+      );
+    } catch (error) {
+      return new ErrorResponse("Error fetching transactions", error.message);
     }
-    return new SuccessResponse("Transactions retrieved successfully", transactions);
+    
   };
 }
