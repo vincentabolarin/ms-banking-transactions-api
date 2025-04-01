@@ -4,11 +4,11 @@ import mongoose, { ClientSession } from "mongoose";
 
 @injectable()
 export class TransactionRepository {
-  async create(transactionData: Partial<ITransaction>, session?: ClientSession) {
+  create = async (transactionData: Partial<ITransaction>, session?: ClientSession) => {
     return await Transaction.create([{ ...transactionData }], { session });
   }
 
-  async findAllByAccount(accountId: mongoose.Schema.Types.ObjectId) {
+  findAllByAccount = async (accountId: mongoose.Schema.Types.ObjectId) => {
     return await Transaction.find({ accountId });
   }
 }
