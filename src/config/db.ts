@@ -1,17 +1,18 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import logger from "../utils/logger.js";
 
 dotenv.config();
 
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI as string);
-    console.log("MongoDB Connected");
+    logger.info("MongoDB Connected");
   } catch (error) {
     if (error instanceof Error) {
-      console.error("MongoDB connection error:", error.message);
+      logger.error("MongoDB connection error:", error.message);
     } else {
-      console.error("An unknown error occurred:", error);
+      logger.error("An unknown error occurred:", error);
     }
     process.exit(1);
   }
