@@ -13,12 +13,16 @@ export class TransactionService {
   ) {}
 
   deposit = async (
-    accountId: mongoose.Schema.Types.ObjectId,
+    accountId: mongoose.Types.ObjectId,
     amount: number
   ) => {
     // Check if amount is greater than zero
     if (amount <= 0)
       return new ErrorResponse("Deposit amount must be greater than zero");
+
+    // Check if the account exists
+    const account = await this.accountRepository.findById(accountId);
+    if (!account) return new ErrorResponse("Account does not exist");
 
     const session = await mongoose.startSession();
     session.startTransaction();
@@ -41,7 +45,7 @@ export class TransactionService {
   };
 
   withdraw = async (
-    accountId: mongoose.Schema.Types.ObjectId,
+    accountId: mongoose.Types.ObjectId,
     amount: number
   ) => {
     // Check if amount is greater than zero
@@ -77,8 +81,8 @@ export class TransactionService {
   };
 
   transfer = async (
-    senderAccountId: mongoose.Schema.Types.ObjectId,
-    receiverAccountId: mongoose.Schema.Types.ObjectId,
+    senderAccountId: mongoose.Types.ObjectId,
+    receiverAccountId: mongoose.Types.ObjectId,
     amount: number
   ) => {
     // Check if amount is greater than zero
@@ -146,7 +150,7 @@ export class TransactionService {
     }
   };
 
-  getTransactions = async (accountId: mongoose.Schema.Types.ObjectId) => {
+  getTransactions = async (accountId: mongoose.Types.ObjectId) => {
     // Check if the account exists
     const account = await this.accountRepository.findById(
       accountId
