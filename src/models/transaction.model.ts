@@ -18,11 +18,15 @@ const TransactionSchema = new mongoose.Schema({
   },
   senderAccountId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: false,
+    required: function (this: any) {
+      return this.type === "transfer";
+    },
   },
   receiverAccountId: {
     type: mongoose.Schema.Types.ObjectId,
-    required: false,
+    required: function (this: any) {
+      return this.type === "transfer";
+    },
   },
   amount: { type: Number, required: true },
   type: {
