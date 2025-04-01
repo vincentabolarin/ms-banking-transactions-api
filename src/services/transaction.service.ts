@@ -136,7 +136,7 @@ export class TransactionService {
       );
 
       const transaction = await this.transactionRepository.create(
-        { accountId: senderAccountId, amount, type: "transfer" },
+        { accountId: senderAccountId, senderAccountId, receiverAccountId, amount, type: "transfer" },
         session
       );
 
