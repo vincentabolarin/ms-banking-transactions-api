@@ -61,7 +61,7 @@ export class AuthService {
       }
 
       // Generate JWT token
-      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET!, {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, {
         expiresIn: "1h",
       });
 

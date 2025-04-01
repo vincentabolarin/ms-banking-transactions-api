@@ -51,6 +51,8 @@ export class AccountController {
             res.status(500).json(result);
             break;
         }
+      } else {
+        res.status(200).json(result);
       }
     } catch (error) {
       next(error);
