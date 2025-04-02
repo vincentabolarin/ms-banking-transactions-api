@@ -20,7 +20,7 @@ export class AuthController {
             break;
         }
       } else {
-        res.status(200).json(result);
+        res.status(201).json(result);
       }
     } catch (error) {
       next(error);

@@ -17,7 +17,7 @@ export class AccountService {
       // Check if an account already exists for the user
       const existingAccount = await this.accountRepository.findByUserId(userId);
       if (existingAccount) {
-        return new ErrorResponse("Account already exists for this user");
+        return new ErrorResponse("An Account already exists for this user");
       }
 
       // Create the account
