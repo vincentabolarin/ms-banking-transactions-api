@@ -18,7 +18,7 @@ export class TransactionService {
   ) => {
     // Check if amount is greater than zero
     if (amount <= 0)
-      return new ErrorResponse("Deposit amount must be greater than zero");
+      return new ErrorResponse("Deposit amount must be a positive number");
 
     // Check if the account exists
     const account = await this.accountRepository.findById(accountId);
@@ -50,7 +50,7 @@ export class TransactionService {
   ) => {
     // Check if amount is greater than zero
     if (amount <= 0)
-      return new ErrorResponse("Withdrawal amount must be greater than zero");
+      return new ErrorResponse("Withdrawal amount must be a positive number");
 
     // Check if the account exists
     const account = await this.accountRepository.findById(accountId);
@@ -87,7 +87,7 @@ export class TransactionService {
   ) => {
     // Check if amount is greater than zero
     if (amount <= 0) {
-      return new ErrorResponse("Transfer amount must be greater than zero");
+      return new ErrorResponse("Transfer amount must be a positive number");
     }
 
     // Check if the sender account exists

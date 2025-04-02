@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 import app from "../app.js";
 import connectDB from "../config/db.js";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import userModel from "../models/user.model.js";
+import User from "../models/user.model.js";
 
 const testUser = {
-  firstName: "Jaden",
+  firstName: "Jimenez",
   lastName: "Doe",
-  email: "jadendoe@example.com",
+  email: "jimenezdoe@example.com",
   password: "password123",
 };
 
@@ -26,7 +26,7 @@ describe("Authentication API Tests", () => {
   });
 
   afterEach(async () => {
-    await userModel.deleteMany({ _id: { $in: createdUserIds } });
+    await User.deleteMany({ _id: { $in: createdUserIds } });
     createdUserIds = [];
   });
 
