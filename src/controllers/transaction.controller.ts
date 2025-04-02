@@ -18,8 +18,8 @@ export class TransactionController {
       );
       if (!result.success) {
         switch (result.message) {
-          case "Deposit amount must be greater than zero":
-            res.status(409).json(result);
+          case "Deposit amount must be a positive number":
+            res.status(400).json(result);
             break;
 
           case "Account does not exist":
@@ -47,7 +47,7 @@ export class TransactionController {
       );
       if (!result.success) {
         switch (result.message) {
-          case "Withdrawal amount must be greater than zero":
+          case "Withdrawal amount must be a positive number":
             res.status(409).json(result);
             break;
           
@@ -82,7 +82,7 @@ export class TransactionController {
       
       if (!result.success) {
         switch (result.message) {
-          case "Transfer amount must be greater than zero":
+          case "Transfer amount must be a positive number":
             res.status(409).json(result);
             break;
           
@@ -128,10 +128,6 @@ export class TransactionController {
       if (!result.success) {
         switch (result.message) {
           case "Account does not exist":
-            res.status(404).json(result);
-            break;
-          
-          case "No transaction found for this account":
             res.status(404).json(result);
             break;
           
