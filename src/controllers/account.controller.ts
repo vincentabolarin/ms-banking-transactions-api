@@ -20,7 +20,7 @@ export class AccountController {
 
       if (!result.success) {
         switch (result.message) {
-          case "Account already exists for this user":
+          case "An Account already exists for this user":
             res.status(409).json(result);
             break;
           

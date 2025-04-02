@@ -19,19 +19,15 @@ const authMiddleware = (
     res.status(401).json(new ErrorResponse("Access denied; no authorization header provided"));
     return;
   }
-  // Check if the token is in the correct format (Bearer <token>)
-  if (!authHeader.startsWith("Bearer ")) {
-    res.status(401).json(new ErrorResponse("Invalid token format"));
-    return;
-  }
+
   // Extract the token from the Authorization header
   const token = authHeader.split(" ")[1];  
 
   // Check if the token is present
-  if (!token) {
+  if (!authHeader.startsWith("Bearer ") || !token) {
     res
       .status(401)
-      .json(new ErrorResponse("Access denied; no token provided"));
+      .json(new ErrorResponse("Access denied; no valid token provided"));
     return;
   }
 
